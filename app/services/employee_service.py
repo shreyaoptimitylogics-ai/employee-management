@@ -2,8 +2,9 @@ from datetime import date
 from sqlalchemy.orm import Session
 
 from app.models.employee import Employee
-from app.schemas.employee import EmployeeCreate
+from app.schemas.employee import EmployeeCreate , EmployeeUpdate
 from app.repositories import employee
+from app.constants import messages
 
 
 def create_employee(
@@ -17,7 +18,7 @@ def create_employee(
     )
 
     if existing_employee:
-        raise ValueError("Employee with this email already exists")
+       raise ValueError(messages.EMPLOYEE_EMAIL_EXISTS)
 
     new_employee = employee.create_employee(
         db,
@@ -68,7 +69,7 @@ def get_employee_by_id(
     )
 
     if not employee_data:
-        raise ValueError("Employee not found")
+        raise ValueError(messages.EMPLOYEE_NOT_FOUND)
 
     return employee_data
 
@@ -86,7 +87,7 @@ def update_employee(
     )
 
     if not existing_employee:
-        raise ValueError("Employee not found")
+        raise ValueError(messages.EMPLOYEE_NOT_FOUND)
 
     if employee_data.email != existing_employee.email:
         email_exists = employee.get_employee_by_email(
@@ -95,7 +96,7 @@ def update_employee(
         )
 
         if email_exists:
-            raise ValueError("Employee with this email already exists")
+            raise ValueError(messages.EMPLOYEE_EMAIL_EXISTS)
 
     return employee.update_employee(
         db,
@@ -116,7 +117,7 @@ def delete_employee(
     )
 
     if not existing_employee:
-        raise ValueError("Employee not found")
+        raise ValueError(messages.EMPLOYEE_NOT_FOUND)
 
     return employee.delete_employee(
         db,
@@ -136,7 +137,7 @@ def update_employee_status(
     )
 
     if not existing_employee:
-        raise ValueError("Employee not found")
+         raise ValueError(messages.EMPLOYEE_NOT_FOUND)
 
     return employee.update_employee_status(
         db,

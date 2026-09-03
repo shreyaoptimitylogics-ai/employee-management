@@ -1,13 +1,15 @@
 from datetime import date
 from fastapi import APIRouter, Depends, HTTPException, status , Query
 from sqlalchemy.orm import Session
-
+from app.constants import messages
 from app.core.database import get_db
 from app.schemas.employee import (
     EmployeeCreate,
-    EmployeeResponse,
     EmployeeUpdate,
-    EmployeeStatusUpdate
+    EmployeeStatusUpdate,
+    EmployeeResponse,
+    EmployeeCreateResponse,
+    EmployeeUpdateResponse,
 )
 from app.services import employee_service
 
@@ -20,7 +22,7 @@ router = APIRouter(
 
 @router.post(
     "/",
-    response_model=EmployeeResponse,
+    response_model=EmployeeCreateResponse,
     status_code=status.HTTP_201_CREATED
 )
 def create_employee(
@@ -28,10 +30,15 @@ def create_employee(
     db: Session = Depends(get_db)
 ):
     try:
-        return employee_service.create_employee(
+        created_employee = employee_service.create_employee(
             db,
             employee_data
         )
+
+        return {
+            "message": messages.EMPLOYEE_CREATED,
+            "data": created_employee
+        }
 
     except ValueError as e:
         raise HTTPException(
@@ -99,7 +106,7 @@ def get_employee(
 
 @router.put(
     "/{id}",
-    response_model=EmployeeResponse,
+    response_model=EmployeeUpdateResponse,
     status_code=status.HTTP_200_OK
 )
 def update_employee(
@@ -108,23 +115,27 @@ def update_employee(
     db: Session = Depends(get_db)
 ):
     try:
-        return employee_service.update_employee(
+        updated_employee = employee_service.update_employee(
             db,
             id,
             employee_data
         )
+
+        return {
+            "message": messages.EMPLOYEE_UPDATED,
+            "data": updated_employee
+        }
 
     except ValueError as e:
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
             detail=str(e)
         )
-
         # delete
 
 @router.delete(
     "/{id}",
-    status_code=status.HTTP_204_NO_CONTENT
+    status_code=status.HTTP_200_OK
 )
 def delete_employee(
     id: int,
@@ -136,12 +147,15 @@ def delete_employee(
             id
         )
 
+        return {
+            "message": messages.EMPLOYEE_DELETED
+        }
+
     except ValueError as e:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=str(e)
-        )
-
+        )        
 
 
 @router.patch(

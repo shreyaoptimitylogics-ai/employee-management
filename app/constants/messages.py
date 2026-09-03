@@ -1,0 +1,5 @@
+EMPLOYEE_NOT_FOUND = "Employee not found"
+EMPLOYEE_EMAIL_EXISTS = "Email already exists"
+EMPLOYEE_DELETED = "Employee deleted successfully"
+EMPLOYEE_UPDATED = "Employee updated successfully"
+EMPLOYEE_CREATED = "Employee created successfully"

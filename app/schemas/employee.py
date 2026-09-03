@@ -1,19 +1,28 @@
 from datetime import date, datetime
 from typing import Literal
+
 from pydantic import BaseModel, EmailStr, Field, ConfigDict, field_validator
 
 
 class EmployeeCreate(BaseModel):
-    first_name: str = Field(..., min_length=1, max_length=100)
-    last_name: str = Field(..., min_length=1, max_length=100)
+    first_name: str = Field(..., min_length=2, max_length=100)
+    last_name: str = Field(..., min_length=2, max_length=100)
     email: EmailStr
-    phone: str | None = None
-    age: int | None = None
-    department: str = Field(..., min_length=1, max_length=100)
-    designation: str = Field(..., min_length=1, max_length=100)
+    phone: str | None = Field(
+        default=None,
+        min_length=10,
+        max_length=15
+    )
+    age: int | None = Field(
+        default=None,
+        ge=18,
+        le=100
+    )
+    department: str = Field(..., min_length=2, max_length=100)
+    designation: str = Field(..., min_length=2, max_length=100)
     salary: float = Field(..., gt=0)
     joining_date: date
-    status: str = "Active"
+    status: Literal["Active", "Inactive"] = "Active"
 
     @field_validator("joining_date")
     @classmethod
@@ -22,17 +31,26 @@ class EmployeeCreate(BaseModel):
             raise ValueError("Joining date cannot be in the future")
         return value
 
+
 class EmployeeUpdate(BaseModel):
-    first_name: str = Field(..., min_length=1, max_length=100)
-    last_name: str = Field(..., min_length=1, max_length=100)
+    first_name: str = Field(..., min_length=2, max_length=100)
+    last_name: str = Field(..., min_length=2, max_length=100)
     email: EmailStr
-    phone: str | None = None
-    age: int | None = None
-    department: str = Field(..., min_length=1, max_length=100)
-    designation: str = Field(..., min_length=1, max_length=100)
+    phone: str | None = Field(
+        default=None,
+        min_length=10,
+        max_length=15
+    )
+    age: int | None = Field(
+        default=None,
+        ge=18,
+        le=100
+    )
+    department: str = Field(..., min_length=2, max_length=100)
+    designation: str = Field(..., min_length=2, max_length=100)
     salary: float = Field(..., gt=0)
     joining_date: date
-    status: str = "Active"
+    status: Literal["Active", "Inactive"] = "Active"
 
     @field_validator("joining_date")
     @classmethod
@@ -63,3 +81,11 @@ class EmployeeResponse(BaseModel):
     created_at: datetime
     updated_at: datetime
 
+
+class EmployeeCreateResponse(BaseModel):
+    message: str
+    data: EmployeeResponse
+
+class EmployeeUpdateResponse(BaseModel):
+    message: str
+    data: EmployeeResponse
