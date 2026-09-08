@@ -62,8 +62,8 @@ def get_employees(
     status: str | None = Query(None),
     designation: str | None = Query(None),
     joining_date: date | None = Query(None),
-    sort_by: str = Query("id"),
-    sort_order: str = Query("asc"),
+    sort_by: str = Query("created_at"),
+    sort_order: str = Query("desc"),
     db: Session = Depends(get_db)
 ):
     return employee_service.get_employees(

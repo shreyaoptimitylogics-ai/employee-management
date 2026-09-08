@@ -1,6 +1,5 @@
 from datetime import date
 from sqlalchemy.orm import Session
-
 from app.models.employee import Employee
 from app.schemas.employee import EmployeeCreate , EmployeeUpdate
 from app.repositories import employee
@@ -38,8 +37,8 @@ def get_employees(
     status: str | None = None,
     designation: str | None = None,
     joining_date: date | None = None,
-    sort_by: str = "id",
-    sort_order: str = "asc",
+    sort_by: str = "created_at",
+    sort_order: str = "desc",
 ) -> list[Employee]:
 
     return employee.get_employees(

@@ -2,6 +2,7 @@ from datetime import datetime
 from sqlalchemy.orm import Session
 from app.models.employee import Employee
 from app.schemas.employee import EmployeeCreate , EmployeeUpdate
+from sqlalchemy import func
 
 
 def create_employee(db: Session, employee_data: EmployeeCreate) -> Employee:
@@ -39,10 +40,12 @@ def get_employees(
     # Search
     if search:
         search_value = f"%{search}%"
+        full_name = func.concat(Employee.first_name, ' ', Employee.last_name)
         query = query.filter(
             (Employee.first_name.ilike(search_value)) |
             (Employee.last_name.ilike(search_value)) |
-            (Employee.email.ilike(search_value))
+            (Employee.email.ilike(search_value)) |
+            (full_name.ilike(search_value))
         )
 
     # Filters
@@ -73,9 +76,9 @@ def get_employees(
     sort_column = allowed_sort_fields.get(sort_by, Employee.id)
 
     if sort_order == "desc":
-        query = query.order_by(sort_column.desc())
+        query = query.order_by(sort_column.desc(), Employee.id.asc())
     else:
-        query = query.order_by(sort_column.asc())
+        query = query.order_by(sort_column.asc(), Employee.id.asc())
 
     return query.offset(skip).limit(limit).all()
 

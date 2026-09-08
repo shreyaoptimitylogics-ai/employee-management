@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import {
   createEmployee,
@@ -95,7 +94,7 @@ const EmployeeForm = ({ employee, onSuccess, onClose }) => {
   };
 
   const inputClass =
-    "w-full px-3.5 py-2.5 rounded-lg border border-[#DCE9EA] text-sm text-[#14231C] placeholder:text-[#9FB3B5] focus:outline-none focus:ring-2 focus:ring-[#2E9DA9]/25 focus:border-[#2E9DA9] transition-colors duration-200";
+    "w-full px-3.5 py-2.5 rounded-lg border border-gray-400 text-sm text-black placeholder:text-black bg-white";
 
   const errorClass = "mt-1 text-sm text-red-500";
 
@@ -109,7 +108,7 @@ const EmployeeForm = ({ employee, onSuccess, onClose }) => {
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-5 border-b border-[#EAF3F3]">
+        <div className="flex items-center justify-between px-6 py-5 border-b border-blue-50">
           <h2 className="text-lg font-semibold text-[#14231C]">
             {employee ? "Edit Employee" : "Add Employee"}
           </h2>
@@ -117,7 +116,7 @@ const EmployeeForm = ({ employee, onSuccess, onClose }) => {
           <button
             type="button"
             onClick={onClose}
-            className="p-1.5 rounded-lg text-[#9FB3B5] hover:text-[#14231C] hover:bg-[#F4FBFB] transition-colors duration-200"
+            className="p-1.5 rounded-lg text-blue-300 hover:text-[#14231C] hover:bg-blue-50 transition-colors duration-200"
           >
             <svg
               width="18"
@@ -301,7 +300,7 @@ const EmployeeForm = ({ employee, onSuccess, onClose }) => {
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 rounded-lg text-sm font-medium text-[#5C7A7D] hover:bg-[#F4FBFB] transition-colors duration-200"
+              className="px-4 py-2 rounded-lg text-sm font-medium text-blue-600 hover:bg-blue-50 transition-colors duration-200"
             >
               Cancel
             </button>
@@ -309,13 +308,13 @@ const EmployeeForm = ({ employee, onSuccess, onClose }) => {
             <button
               type="submit"
               disabled={loading}
-              className="px-4 py-2 rounded-lg text-sm font-medium bg-[#2E9DA9] text-white hover:bg-[#25818C] disabled:opacity-50 transition-colors duration-200"
+              className="px-4 py-2 rounded-lg text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 transition-colors duration-200"
             >
               {loading
                 ? "Saving..."
                 : employee
-                ? "Update Employee"
-                : "Save Employee"}
+                  ? "Update Employee"
+                  : "Save Employee"}
             </button>
           </div>
 
@@ -326,4 +325,3 @@ const EmployeeForm = ({ employee, onSuccess, onClose }) => {
 };
 
 export default EmployeeForm;
-
