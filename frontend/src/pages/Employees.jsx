@@ -170,8 +170,12 @@ function Employees() {
                 </label>
                 <select
                   value={department}
-                  onChange={(e) => setDepartment(e.target.value)}
+                  onChange={(e) => {
+                    setDepartment(e.target.value);
+                    setPage(1);
+                  }}
                   className={selectClass}
+
                 >
                   <option value="">All Departments</option>
                   <option value="IT">IT</option>
@@ -187,7 +191,10 @@ function Employees() {
                 </label>
                 <select
                   value={status}
-                  onChange={(e) => setStatus(e.target.value)}
+                  onChange={(e) => {
+                    setStatus(e.target.value);
+                    setPage(1);
+                  }}
                   className={selectClass}
                 >
                   <option value="">All Status</option>
@@ -202,7 +209,10 @@ function Employees() {
                 </label>
                 <select
                   value={designation}
-                  onChange={(e) => setDesignation(e.target.value)}
+                  onChange={(e) => {
+                    setDesignation(e.target.value);
+                    setPage(1);
+                  }}
                   className={selectClass}
                 >
                   <option value="">All Designations</option>
@@ -220,7 +230,10 @@ function Employees() {
                 <input
                   type="date"
                   value={joiningDate}
-                  onChange={(e) => setJoiningDate(e.target.value)}
+                  onChange={(e) => {
+                    setJoiningDate(e.target.value);
+                    setPage(1);
+                  }}
                   className={selectClass}
                 />
               </div>
@@ -232,6 +245,7 @@ function Employees() {
                     setStatus("");
                     setDesignation("");
                     setJoiningDate("");
+                    setPage(1);
                   }}
                   className="text-[13px] font-medium text-blue-600 hover:text-blue-800 transition-colors duration-150 w-full sm:w-auto sm:ml-auto text-left sm:text-right"
                 >
