@@ -147,6 +147,7 @@ const EmployeeForm = ({ employee, onSuccess, onClose }) => {
                 value={formData.first_name}
                 onChange={handleChange}
                 className={inputClass}
+                autoComplete="off"
               />
 
               {errors.first_name && (
@@ -161,6 +162,7 @@ const EmployeeForm = ({ employee, onSuccess, onClose }) => {
                 value={formData.last_name}
                 onChange={handleChange}
                 className={inputClass}
+                autoComplete="off"
               />
 
               {errors.last_name && (
@@ -176,6 +178,7 @@ const EmployeeForm = ({ employee, onSuccess, onClose }) => {
               value={formData.status}
               onChange={handleChange}
               className={inputClass}
+              autoComplete="off"
             >
               <option value="Active">Active</option>
               <option value="Inactive">Inactive</option>
@@ -195,6 +198,7 @@ const EmployeeForm = ({ employee, onSuccess, onClose }) => {
               value={formData.email}
               onChange={handleChange}
               className={inputClass}
+              autoComplete="off"
             />
 
             {errors.email && (
@@ -211,6 +215,7 @@ const EmployeeForm = ({ employee, onSuccess, onClose }) => {
                 value={formData.phone}
                 onChange={handleChange}
                 className={inputClass}
+                autoComplete="off"
               />
 
               {errors.phone && (
@@ -226,6 +231,7 @@ const EmployeeForm = ({ employee, onSuccess, onClose }) => {
                 value={formData.age}
                 onChange={handleChange}
                 className={inputClass}
+                autoComplete="off"
               />
 
               {errors.age && (
@@ -243,6 +249,7 @@ const EmployeeForm = ({ employee, onSuccess, onClose }) => {
                 value={formData.department}
                 onChange={handleChange}
                 className={inputClass}
+                autoComplete="off"
               />
 
               {errors.department && (
@@ -257,6 +264,7 @@ const EmployeeForm = ({ employee, onSuccess, onClose }) => {
                 value={formData.designation}
                 onChange={handleChange}
                 className={inputClass}
+                autoComplete="off"
               />
 
               {errors.designation && (
@@ -275,6 +283,7 @@ const EmployeeForm = ({ employee, onSuccess, onClose }) => {
                 value={formData.salary}
                 onChange={handleChange}
                 className={inputClass}
+                autoComplete="off"
               />
 
               {errors.salary && (
@@ -289,6 +298,7 @@ const EmployeeForm = ({ employee, onSuccess, onClose }) => {
                 value={formData.joining_date}
                 onChange={handleChange}
                 className={inputClass}
+                autoComplete="off"
               />
 
               {errors.joining_date && (
