@@ -49,7 +49,7 @@ def get_employees(
         department,
         status,
         designation,
-        joining_date,  
+        joining_date,
         sort_by,
         sort_order
     )

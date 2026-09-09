@@ -62,7 +62,7 @@ def get_employees(
         query = query.filter(Employee.joining_date == joining_date)
 
     # Sorting
-    
+
     allowed_sort_fields = {
         "id": Employee.id,
         "first_name": Employee.first_name,
