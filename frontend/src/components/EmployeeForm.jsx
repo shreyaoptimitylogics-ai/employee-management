@@ -93,14 +93,15 @@ const EmployeeForm = ({ employee, onSuccess, onClose }) => {
     }
   };
 
+  // Matches EmployeeDetails' palette: #1D1B31 text, #6B6785 muted, #F1F0F7 borders, #ADAAC4 placeholders
   const inputClass =
-    "w-full px-3.5 py-2.5 rounded-lg border border-gray-400 text-sm text-black placeholder:text-black bg-white";
+    "w-full px-3.5 py-2.5 rounded-lg border border-[#F1F0F7] text-[13.5px] text-[#1D1B31] placeholder:text-[#ADAAC4] bg-white focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-300 transition-colors duration-150";
 
-  const errorClass = "mt-1 text-sm text-red-500";
+  const errorClass = "mt-1 text-[12px] text-red-500";
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-[#14231C]/40 backdrop-blur-sm p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-[#1D1B31]/40 backdrop-blur-sm p-4"
       onClick={onClose}
     >
       <div
@@ -108,15 +109,16 @@ const EmployeeForm = ({ employee, onSuccess, onClose }) => {
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-5 border-b border-blue-50">
-          <h2 className="text-lg font-semibold text-[#14231C]">
+        <div className="flex items-center justify-between px-5 sm:px-6 py-4 sm:py-5 border-b border-[#F1F0F7]">
+          <h2 className="text-[15px] font-semibold text-[#1D1B31]">
             {employee ? "Edit Employee" : "Add Employee"}
           </h2>
 
           <button
             type="button"
             onClick={onClose}
-            className="p-1.5 rounded-lg text-blue-300 hover:text-[#14231C] hover:bg-blue-50 transition-colors duration-200"
+            aria-label="Close"
+            className="p-1.5 rounded-lg text-[#ADAAC4] hover:text-[#1D1B31] hover:bg-[#FAFAFC] transition-colors duration-150"
           >
             <svg
               width="18"
@@ -134,7 +136,7 @@ const EmployeeForm = ({ employee, onSuccess, onClose }) => {
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="px-6 py-5 space-y-4">
+        <form onSubmit={handleSubmit} className="px-5 sm:px-6 py-5 space-y-4">
 
           {/* First Name + Last Name */}
           <div className="grid grid-cols-2 gap-4">
@@ -300,7 +302,7 @@ const EmployeeForm = ({ employee, onSuccess, onClose }) => {
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 rounded-lg text-sm font-medium text-blue-600 hover:bg-blue-50 transition-colors duration-200"
+              className="px-4 py-2.5 rounded-lg text-sm font-medium text-[#6B6785] hover:bg-[#FAFAFC] transition-colors duration-150"
             >
               Cancel
             </button>
@@ -308,7 +310,7 @@ const EmployeeForm = ({ employee, onSuccess, onClose }) => {
             <button
               type="submit"
               disabled={loading}
-              className="px-4 py-2 rounded-lg text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 transition-colors duration-200"
+              className="px-4 py-2.5 rounded-lg text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 transition-colors duration-150"
             >
               {loading
                 ? "Saving..."
