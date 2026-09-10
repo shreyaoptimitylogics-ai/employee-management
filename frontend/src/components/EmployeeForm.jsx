@@ -197,8 +197,37 @@ const EmployeeForm = ({ employee, onSuccess, onClose }) => {
       setErrors({});
       onSuccess();
       onClose();
+
     } catch (error) {
-      console.error("Failed to save employee:", error);
+      console.error("FULL ERROR:", error);
+      console.log("STATUS:", error.response?.status);
+      console.log("RESPONSE DATA:", error.response?.data);
+      console.log("DETAIL:", error.response?.data?.detail);
+
+      if (error.response?.status === 409) {
+        const message = error.response?.data?.detail || "";
+
+        if (message.toLowerCase().includes("email")) {
+          setErrors((prev) => ({
+            ...prev,
+            email: "Email already exists",
+          }));
+        }
+
+        if (message.toLowerCase().includes("phone")) {
+          setErrors((prev) => ({
+            ...prev,
+            phone: "Phone number already exists",
+          }));
+        }
+      } else {
+        setErrors((prev) => ({
+          ...prev,
+          general: "Failed to save employee. Please try again.",
+        }));
+      }
+
+
     } finally {
       setLoading(false);
     }

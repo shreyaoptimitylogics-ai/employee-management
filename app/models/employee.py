@@ -9,28 +9,58 @@ from app.core.database import Base
 class Employee(Base):
     __tablename__ = "employees"
 
-    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    id: Mapped[int] = mapped_column(
+        Integer,
+        primary_key=True,
+        index=True,
+    )
 
-    first_name: Mapped[str] = mapped_column(String(100), nullable=False)
-    last_name: Mapped[str] = mapped_column(String(100), nullable=False)
+    first_name: Mapped[str] = mapped_column(
+        String(100),
+        nullable=False,
+    )
 
-    age: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    last_name: Mapped[str] = mapped_column(
+        String(100),
+        nullable=False,
+    )
+
+    age: Mapped[int | None] = mapped_column(
+        Integer,
+        nullable=True,
+    )
 
     email: Mapped[str] = mapped_column(
         String(255),
         unique=True,
         nullable=False,
-        index=True,
     )
 
-    phone: Mapped[str | None] = mapped_column(String(20), nullable=True)
+    phone: Mapped[str | None] = mapped_column(
+        String(20),
+        unique=True,
+        nullable=True,
+    )
 
-    department: Mapped[str] = mapped_column(String(100), nullable=False)
-    designation: Mapped[str] = mapped_column(String(100), nullable=False)
+    department: Mapped[str] = mapped_column(
+        String(100),
+        nullable=False,
+    )
 
-    salary: Mapped[float] = mapped_column(Numeric(12, 2), nullable=False)
+    designation: Mapped[str] = mapped_column(
+        String(100),
+        nullable=False,
+    )
 
-    joining_date: Mapped[date] = mapped_column(Date, nullable=False)
+    salary: Mapped[float] = mapped_column(
+        Numeric(12, 2),
+        nullable=False,
+    )
+
+    joining_date: Mapped[date] = mapped_column(
+        Date,
+        nullable=False,
+    )
 
     status: Mapped[str] = mapped_column(
         String(20),

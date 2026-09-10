@@ -138,7 +138,7 @@ const EmployeeTable = ({ onEdit, search, department, status, designation, joinin
     return (
       <div className="flex items-center gap-3 p-6 text-[13px] text-slate-500">
         <div className="w-3.5 h-3.5 border-2 border-slate-200 border-t-blue-600 rounded-full animate-spin" />
-        <span>Loading roster…</span>
+        <span>Loading....</span>
       </div>
     );
   }

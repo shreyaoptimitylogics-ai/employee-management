@@ -11,21 +11,33 @@ def create_employee(
     employee_data: EmployeeCreate
 ) -> Employee:
 
+    # Email check
     existing_employee = employee.get_employee_by_email(
         db,
         employee_data.email
     )
 
     if existing_employee:
-       raise ValueError(messages.EMPLOYEE_EMAIL_EXISTS)
+        raise ValueError(messages.EMPLOYEE_EMAIL_EXISTS)
 
+    # Phone check
+    if employee_data.phone:
+        existing_phone = (
+            db.query(Employee)
+            .filter(Employee.phone == employee_data.phone)
+            .first()
+        )
+
+        if existing_phone:
+            raise ValueError(messages.EMPLOYEE_PHONE_EXISTS)
+
+    # Create employee
     new_employee = employee.create_employee(
         db,
         employee_data
     )
 
     return new_employee
-
 # get
 
 def get_employees(
